@@ -24,12 +24,10 @@ class DefaultButton extends StatelessWidget {
     //Calculating opacity to create a fade in effect
     double opacity = 1.0;
     final TextStyle style = DefaultTextStyle.of(context).style;
-    if (pageButtonViewModel.activePageIndex ==
-            pageButtonViewModel.totalPages - 2 &&
+    if (pageButtonViewModel.activePageIndex == pageButtonViewModel.totalPages - 2 &&
         pageButtonViewModel.slideDirection == SlideDirection.rightToLeft) {
       opacity = 1.0 - pageButtonViewModel.slidePercent;
-    } else if (pageButtonViewModel.activePageIndex ==
-            pageButtonViewModel.totalPages - 1 &&
+    } else if (pageButtonViewModel.activePageIndex == pageButtonViewModel.totalPages - 1 &&
         pageButtonViewModel.slideDirection == SlideDirection.leftToRight) {
       opacity = pageButtonViewModel.slidePercent;
     }
@@ -69,8 +67,7 @@ class DoneButton extends StatelessWidget {
     //Calculating opacity so as to create a fade in effect
     double opacity = 1.0;
     final TextStyle style = DefaultTextStyle.of(context).style;
-    if (pageButtonViewModel.activePageIndex ==
-            pageButtonViewModel.totalPages - 1 &&
+    if (pageButtonViewModel.activePageIndex == pageButtonViewModel.totalPages - 1 &&
         pageButtonViewModel.slideDirection == SlideDirection.leftToRight) {
       opacity = 1.0 - pageButtonViewModel.slidePercent;
     }
@@ -111,10 +108,7 @@ class PageIndicatorButtons extends StatelessWidget {
   final bool doneButtonPersist;
 
   Widget _getDoneORNextButton() {
-    if ((activePageIndex < totalPages - 1 ||
-            (activePageIndex == totalPages - 1 &&
-                slideDirection == SlideDirection.leftToRight)) &&
-        showNextButton) {
+    if ((activePageIndex < totalPages - 1 || (activePageIndex == totalPages - 1 && slideDirection == SlideDirection.leftToRight)) && showNextButton) {
       return DefaultButton(
         child: nextText,
         onTap: onPressedNextButton,
@@ -127,9 +121,7 @@ class PageIndicatorButtons extends StatelessWidget {
         ),
       );
     } else if (activePageIndex == totalPages - 1 ||
-        (activePageIndex == totalPages - 2 &&
-                slideDirection == SlideDirection.rightToLeft ||
-            doneButtonPersist)) {
+        (activePageIndex == totalPages - 2 && slideDirection == SlideDirection.rightToLeft || doneButtonPersist)) {
       return DoneButton(
         child: doneText,
         onTap: onPressedDoneButton,
@@ -147,9 +139,7 @@ class PageIndicatorButtons extends StatelessWidget {
   }
 
   Widget _getSkipORBackButton() {
-    if (activePageIndex <= totalPages &&
-        activePageIndex >= 1 &&
-        showBackButton) {
+    if (activePageIndex <= totalPages && activePageIndex >= 1 && showBackButton) {
       return DefaultButton(
         child: backText,
         onTap: onPressedBackButton,
@@ -161,9 +151,7 @@ class PageIndicatorButtons extends StatelessWidget {
           slideDirection: slideDirection,
         ),
       );
-    } else if ((activePageIndex < totalPages - 1 ||
-            (activePageIndex == totalPages - 1 &&
-                slideDirection == SlideDirection.leftToRight)) &&
+    } else if ((activePageIndex < totalPages - 1 || (activePageIndex == totalPages - 1 && slideDirection == SlideDirection.leftToRight)) &&
         showSkipButton) {
       return DefaultButton(
         child: skipText,
@@ -209,20 +197,19 @@ class PageIndicatorButtons extends StatelessWidget {
       bottom: 0.0,
       child: DefaultTextStyle(
         style: textStyle,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: _getSkipORBackButton() //Row
-                ), //Padding
-            Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: _getDoneORNextButton() //Row
-                )
-          ],
+        child: Transform.translate(
+          offset: Offset(0, -30),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Padding(padding: const EdgeInsets.only(bottom: 10.0), child: _getSkipORBackButton() //Row
+                  ), //Padding
+              Padding(padding: const EdgeInsets.only(bottom: 10.0), child: _getDoneORNextButton() //Row
+                  )
+            ],
+          ),
         ),
       ),
     );
